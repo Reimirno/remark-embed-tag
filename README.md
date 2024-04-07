@@ -1,106 +1,72 @@
-# Typescript NPM Package Starter
-My template for creating npm packages using typescript.
+# remark-embed-tag
 
-- TS to JS
-- Testing via Jest, includes coverage
-- ESLint
-- Ignore files to ensure minimal code is stored/shipped
+A remark plugin to render a html embed for markdown files.
 
-NPM link: [@el3um4s/typescript-npm-package-starter](https://www.npmjs.com/package/@el3um4s/typescript-npm-package-starter)
+This plugin can be used with [Astro](https://docs.astro.build/en/guides/markdown-content/#markdown-plugins), [Gatsby](https://www.gatsbyjs.com/tutorial/remark-plugin-tutorial/), [Docusaurus](https://docusaurus.io/docs/next/markdown-features/plugins) and all other frameworks that support [remark plugins](https://github.com/remarkjs/remark#plugins).
 
-### Getting Started
+Write this in your markdown file:
 
-To create a new project based on this template using degit:
+```markdown
+{% steam 1260810 %}
+```
+
+and it gets transformed to
+
+```html
+<iframe
+  src="https://store.steampowered.com/widget/1260810/"
+  frameborder="0"
+  height="190"
+></iframe>
+```
+
+## Install
 
 ```bash
-npx degit el3um4s/typescript-npm-package-starter
+npm install remark-embed-tag
 ```
 
-Then install the dependencies with
+## Usage
 
-```bash
-npm install
+```javascript
+import remark from "remark";
+import embedTag from "remark-embed-tag";
+
+remark()
+  .use(embedTag)
+  .process("Hello {% steam 1260810 %}", function (err, file) {
+    if (err) throw err;
+    console.log(String(file));
+  });
+
+// Output: Hello <iframe src="https://store.steampowered.com/widget/1260810/" frameborder="0" height="190"></iframe>
 ```
 
-Now update the name field in package.json with your desired package name. Then update the homepage field in package.json. And finally add your code.
+## Features
 
-### Build the package
+### Steam
 
-Run
-
-```bash
-npm run build
+```markdown
+{% steam appid optional_desc %}
 ```
 
-### Test the package
+- `appid` (required): The Steam appid of the game.
+- `optional_desc` (optional): The description of the game. If not provided, the game description pulled from Steam will be used.
 
-You can test the code with [Jest](https://jestjs.io/)
+Example:
 
-```bash
-npm test
+```markdown
+{% steam 1260810 "This is my proudest game" %}
 ```
 
-You can find the test coverage in `coverage/lcov-report/index.html`.
+## Credits
 
-### Check dependencies
+This embed-tag syntax is inspired by [Hexo's tag embed](https://github.com/hexojs/hexo-tag-embed). I used to be a Hexo user and I really liked the simplicity of the embed tag. Now, I am moving to Astro and I wanted to have the same feature. Hence, I created this plugin.
 
-You can check and upgrade dependencies to the latest versions, ignoring specified versions. with [npm-check-updates](https://www.npmjs.com/package/npm-check-updates):
+While coding, I referred to the following projects:
 
-```bash
-npm run check-updates
-```
+- [remark-hexo](https://github.com/bennycode/remark-hexo)
+- [remark-oembed](https://github.com/sergioramos/remark-oembed)
+- [hexo-tag-steamgame](https://github.com/HCLonely/hexo-tag-steamgame)
 
-You can also use `npm run check-updates:minor` to update only patch and minor.
-
-Instead `npm run check-updates:patch` only updates patch.
-
-### Publish
-
-First commit the changes to GitHub. Then login to your [NPM](https://www.npmjs.com) account (If you don’t have an account you can do so on [https://www.npmjs.com/signup](https://www.npmjs.com/signup))
-
-```bash
-npm login
-```
-
-Then run publish:
-
-```bash
-npm publish
-```
-
-If you're using a scoped name use:
-
-```bash
-npm publish --access public
-```
-
-### Bumping a new version
-
-To update the package use:
-
-```bash
-npm version patch
-```
-
-and then
-
-```bash
-npm publish
-```
-
-### Install and use the package
-
-To use the package in a project:
-
-```bash
-npm i @el3um4s/typescript-npm-package-starter
-```
-
-and then in a file:
-
-```ts
-import { ciao } from "@el3um4s/typescript-npm-package-starter";
-
-const b = ciao("mondo");
-console.log(b); // Ciao Mondo
-```
+This package is bootstraped with [typescript-npm-package-starter](https://github.com/el3um4s/typescript-npm-package-starter)
