@@ -5,6 +5,7 @@ export const VALID_IFRAME_PROPERTY_KEYS = [
   "frameBorder",
   "loading",
   "allowFullScreen",
+  "allowTransparency",
 ] as const;
 
 export type ValidIframePropertyKey =
@@ -31,5 +32,18 @@ export default function createIframe(props: IframeProps): string {
   const frameBorder = properties.frameBorder ?? "0";
   const loading = properties.loading === "lazy" ? "lazy" : "eager";
   const allowFullScreen = properties.allowFullScreen ? "true" : "false";
-  return `<iframe src="${src}" width="${width}" height="${height}" title="${title}" frameBorder="${frameBorder}" loading="${loading}" allowFullScreen="${allowFullScreen}"></iframe>`;
+  const allowTransparency =
+    properties.allowTransparency === "false" ? "false" : "true";
+  return (
+    `<iframe src="${src}" ` +
+    `width="${width}" ` +
+    `height="${height}" ` +
+    `title="${title}" ` +
+    `frameBorder="${frameBorder}" ` +
+    `loading="${loading}" ` +
+    `allowFullScreen="${allowFullScreen}" ` +
+    `allowTransparency="${allowTransparency}" ` +
+    `allow="encrypted-media *; ` +
+    `></iframe>`
+  );
 }
