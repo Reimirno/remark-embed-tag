@@ -6,7 +6,7 @@ export default function createsSpotifyWidget({
   spotifyId,
   properties,
 }: WithIframeProperties<SpotifyProps>): string {
-  const src = `https://open.spotify.com/embed/${type}/${spotifyId}`;
+  const src = `https://open.spotify.com/embed/${type}/${spotifyId}/`;
   properties.title =
     properties.title ?? `Spotify Widget for ${type} ${spotifyId}`;
 

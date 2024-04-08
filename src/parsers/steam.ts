@@ -10,6 +10,6 @@ export default function parseSteam(
   const { args, properties } = result;
   const appid = args[0] as string;
   if (!appid) return null;
-  const descriptionOverride = args[1] as string | undefined;
+  const descriptionOverride = args[1];
   return { appid, descriptionOverride, properties };
 }

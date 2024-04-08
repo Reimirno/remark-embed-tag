@@ -2,7 +2,7 @@
 
 An elegant addition to markdown syntax to embed video/music/game/other contents from various sources.
 
-This is a remark plugin that renders a html embed from a simple tag syntax in markdown.
+This is a remark plugin that renders a html embed from a simple tag syntax in markdown. This tag syntax is inspired by Hexo.
 
 This plugin can be used with [Astro](https://docs.astro.build/en/guides/markdown-content/#markdown-plugins), [Gatsby](https://www.gatsbyjs.com/tutorial/remark-plugin-tutorial/), [Docusaurus](https://docusaurus.io/docs/next/markdown-features/plugins) and all other frameworks that support [remark plugins](https://github.com/remarkjs/remark#plugins).
 

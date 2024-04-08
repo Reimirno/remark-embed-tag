@@ -1,6 +1,10 @@
+export const VALID_YOUTUBE_TYPES = ["playlist", "video"] as const;
+
+export type ValidYouTubeType = (typeof VALID_YOUTUBE_TYPES)[number];
+
 export type YouTubeProps = {
   youtubeId: string;
-  type: "playlist" | "video";
+  type: ValidYouTubeType;
   useCookies: boolean;
 };
 
