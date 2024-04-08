@@ -1,7 +1,8 @@
 import { remark } from "remark";
 import remarkTagEmbed from "../../index";
+import { defaultConfig } from "../../config";
 
-const processor = remark().use(remarkTagEmbed);
+const processor = remark().use(remarkTagEmbed, defaultConfig);
 
 describe("happy path", () => {
   it("should parse youtube", async () => {

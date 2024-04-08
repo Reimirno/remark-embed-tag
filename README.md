@@ -64,11 +64,11 @@ Example:
 ```markdown
 {% youtube PJgEu_Ecuf8 %}
 
-{% youtube PL17274CE9C384D8C7 'playlist' %}
+{% youtube PL17274CE9C384D8C7 "playlist" %}
 
 {% youtube PJgEu_Ecuf8 false %}
 
-{% youtube PL17274CE9C384D8C7 'playlist' false %}
+{% youtube PL17274CE9C384D8C7 "playlist" false %}
 ```
 
 ### Spotify
@@ -85,11 +85,45 @@ Example:
 ```markdown
 {% spotify 2NniAhAtkRACaMeYt48xlD %}
 
-{% spotify 2NniAhAtkRACaMeYt48xlD 'track' %}
+{% spotify 2NniAhAtkRACaMeYt48xlD "track" %}
 
-{% spotify 1NAmidJlEaVgA3MpcPFYGq 'album' %}
+{% spotify 1NAmidJlEaVgA3MpcPFYGq "album" %}
 
-{% spotify 2elBjNSdBE2Y3f0j1mjrql 'artist' %}
+{% spotify 2elBjNSdBE2Y3f0j1mjrql "artist" %}
+```
+
+### Vimeo
+
+```markdown
+{% vimeo vimeo_id %}
+```
+
+- `vimeo_id` (required): The Vimeo video id.
+
+Example:
+
+```markdown
+{% vimeo 383434750 %}
+```
+
+### JsFiddle
+
+```markdown
+{% jsfiddle fiddle_id [tabs] [skin] %}
+```
+
+- `fiddle_id` (required): The JsFiddle id.
+- `tabs` (optional): The tabs to show. Default is `js,resources,html,css,result`.
+- `skin` (optional): The skin of the embed. Default is `light`. Other options are `dark`.
+
+Example:
+
+```markdown
+{% jsfiddle NmudS %}
+
+{% jsfiddle NmudS "js,html,result" %}
+
+{% jsfiddle NmudS "js,html,result" "dark" %}
 ```
 
 ### Generic IFrame
@@ -139,6 +173,28 @@ remark()
 ```
 
 ## Advanced Usage
+
+### Turn on/off Specific Transformations
+
+Every single transformation can be individually turned on/off. This is useful when you want to use only a subset of the transformation features in this plugin.
+
+```javascript
+import remark from "remark";
+import embedTag from "remark-embed-tag";
+
+remark()
+  .use(embedTag, {
+    steam: false,
+    spotify: false,
+  })
+  .process("Hello {% steam 1260810 %}", function (err, file) {
+    if (err) throw err;
+    console.log(String(file));
+  });
+
+// Output: Hello {% steam 1260810 %}
+// No transformation is done for the steam tag
+```
 
 ### Fine-tuning iframe properties
 

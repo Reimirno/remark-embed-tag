@@ -12,40 +12,54 @@ import createsYouTubeWidget from "./widgets/youtube.js";
 import createsSpotifyWidget from "./widgets/spotify.js";
 import createsVimeoWidget from "./widgets/vimeo.js";
 import createsJsFiddleWidget from "./widgets/jsfiddle.js";
+import { Config, defaultConfig } from "./config.js";
 
-export default function remarkTagEmbed() {
+export default function remarkTagEmbed(configs: Config = {} as Config) {
+  configs = { ...defaultConfig, ...configs };
   const transformer = async (ast: Node) => {
     visit(ast, "text", (node: Text) => {
       const { value } = node;
-      const steam = parseSteam(value);
-      if (steam) {
-        node.type = "html" as "text";
-        node.value = createSteamWidget(steam);
+      if (configs.youtube) {
+        const youtube = parseYouTube(value);
+        if (youtube) {
+          node.type = "html" as "text";
+          node.value = createsYouTubeWidget(youtube);
+        }
       }
-      const youtube = parseYouTube(value);
-      if (youtube) {
-        node.type = "html" as "text";
-        node.value = createsYouTubeWidget(youtube);
+      if (configs.steam) {
+        const steam = parseSteam(value);
+        if (steam) {
+          node.type = "html" as "text";
+          node.value = createSteamWidget(steam);
+        }
       }
-      const spotify = parseSpotify(value);
-      if (spotify) {
-        node.type = "html" as "text";
-        node.value = createsSpotifyWidget(spotify);
+      if (configs.spotify) {
+        const spotify = parseSpotify(value);
+        if (spotify) {
+          node.type = "html" as "text";
+          node.value = createsSpotifyWidget(spotify);
+        }
       }
-      const vimeo = parseVimeo(value);
-      if (vimeo) {
-        node.type = "html" as "text";
-        node.value = createsVimeoWidget(vimeo);
+      if (configs.vimeo) {
+        const vimeo = parseVimeo(value);
+        if (vimeo) {
+          node.type = "html" as "text";
+          node.value = createsVimeoWidget(vimeo);
+        }
       }
-      const jsfiddle = parseJsFiddle(value);
-      if (jsfiddle) {
-        node.type = "html" as "text";
-        node.value = createsJsFiddleWidget(jsfiddle);
+      if (configs.jsfiddle) {
+        const jsfiddle = parseJsFiddle(value);
+        if (jsfiddle) {
+          node.type = "html" as "text";
+          node.value = createsJsFiddleWidget(jsfiddle);
+        }
       }
-      const embed = parseEmbed(value);
-      if (embed) {
-        node.type = "html" as "text";
-        node.value = createEmbedWidget(embed);
+      if (configs.embed) {
+        const embed = parseEmbed(value);
+        if (embed) {
+          node.type = "html" as "text";
+          node.value = createEmbedWidget(embed);
+        }
       }
     });
   };
