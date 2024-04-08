@@ -1,21 +1,19 @@
 import type { YouTubeProps } from "../schema/youtube.js";
-import createIframe, { type IframeProps } from "./common.js";
+import createIframe, { type WithIframeProperties } from "./common.js";
 
 export default function createsYouTubeWidget({
   youtubeId,
   type,
   useCookies,
-}: YouTubeProps): string {
+  properties,
+}: WithIframeProperties<YouTubeProps>): string {
   const base = useCookies
     ? "https://www.youtube.com"
     : "https://www.youtube-nocookie.com";
   const embed = type === "video" ? "/embed/" : "/embed/videoseries?list=";
   const src = `${base}${embed}${youtubeId}/`;
+  properties.title =
+    properties.title ?? `YouTube Widget for ${type} ${youtubeId}`;
 
-  const iframeProps: IframeProps = {
-    src,
-    title: `YouTube Widget for ${type} ${youtubeId}`,
-  };
-
-  return createIframe(iframeProps);
+  return createIframe({ src, properties });
 }

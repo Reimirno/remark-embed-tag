@@ -1,7 +1,7 @@
 {
   "name": "remark-embed-tag",
   "type": "module",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Provide easy syntax to create embed in your markdowns, like Hexo Tag Plugin",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

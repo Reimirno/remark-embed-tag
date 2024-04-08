@@ -11,18 +11,24 @@ describe("steam args parser", () => {
     expect(parseSteam("{% steam %}")).toBeNull();
   });
   it("should return appid if present", () => {
-    expect(parseSteam("{% steam 123 %}")).toEqual({ appid: "123" });
+    expect(parseSteam("{% steam 123 %}")).toEqual(
+      expect.objectContaining({ appid: "123" })
+    );
   });
   it("should return appid and description if present", () => {
-    expect(parseSteam('{% steam 123 "456 789" %}')).toEqual({
-      appid: "123",
-      descriptionOverride: "456 789",
-    });
+    expect(parseSteam('{% steam 123 "456 789" %}')).toEqual(
+      expect.objectContaining({
+        appid: "123",
+        descriptionOverride: "456 789",
+      })
+    );
   });
   it("should ignore extra args", () => {
-    expect(parseSteam('{% steam 123 "456" 789 %}')).toEqual({
-      appid: "123",
-      descriptionOverride: "456",
-    });
+    expect(parseSteam('{% steam 123 "456" 789 %}')).toEqual(
+      expect.objectContaining({
+        appid: "123",
+        descriptionOverride: "456",
+      })
+    );
   });
 });

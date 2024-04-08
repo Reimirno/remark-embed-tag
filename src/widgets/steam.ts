@@ -1,19 +1,16 @@
 import type { SteamProps } from "../schema/steam.js";
-import createIframe, { type IframeProps } from "./common.js";
+import createIframe, { type WithIframeProperties } from "./common.js";
 
 export default function createsSteamWidget({
   appid,
   descriptionOverride,
-}: SteamProps): string {
+  properties,
+}: WithIframeProperties<SteamProps>): string {
   const src = `https://store.steampowered.com/widget/${appid}/${
     descriptionOverride ? `?t=${descriptionOverride}` : ""
   }`;
-  const iframeProps: IframeProps = {
-    src,
-    width: "100%",
-    height: "190",
-    title: `Steam Widget for appid ${appid}`,
-  };
+  properties.title = properties.title ?? `Steam Widget for appid ${appid}`;
+  properties.height = properties.height ?? "190";
 
-  return createIframe(iframeProps);
+  return createIframe({ src, properties });
 }
