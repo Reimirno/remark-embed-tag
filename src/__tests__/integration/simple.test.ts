@@ -16,4 +16,14 @@ describe("happy path", () => {
       /<iframe src="https:\/\/store.steampowered.com\/widget\/123456\/" .*>/
     );
   });
+  it("should parse spotify", async () => {
+    const file = await processor.process(`{% spotify 123456 %}`);
+    expect(String(file)).toMatch(
+      /<iframe src="https:\/\/open.spotify.com\/embed\/track\/123456" .*>/
+    );
+  });
+  it("should parse embed", async () => {
+    const file = await processor.process(`{% embed https://example.com %}`);
+    expect(String(file)).toMatch(/<iframe src="https:\/\/example.com" .*>/);
+  });
 });
