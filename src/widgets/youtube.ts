@@ -10,7 +10,7 @@ export default function createsYouTubeWidget({
     ? "https://www.youtube.com"
     : "https://www.youtube-nocookie.com";
   const embed = type === "video" ? "/embed/" : "/embed/videoseries?list=";
-  const src = `${base}${embed}${youtubeId}`;
+  const src = `${base}${embed}${youtubeId}/`;
 
   const iframeProps: IframeProps = {
     src,

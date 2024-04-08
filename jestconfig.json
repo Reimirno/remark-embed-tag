@@ -4,6 +4,9 @@
       "ts-jest"
     ]
   },
+  "transformIgnorePatterns": [
+    "node_modules/?!remark-parse"
+  ],
   "moduleNameMapper": {
     "^(\\.\\.?\\/.+)\\.js$": "$1"
   },
