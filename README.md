@@ -33,6 +33,8 @@ npm install remark-embed-tag
 
 ## Features
 
+You can see widget showcase [here](https://halcyon.reimirno.com/posts/remark-embed-tag-showcase).
+
 ### Steam
 
 ```markdown
