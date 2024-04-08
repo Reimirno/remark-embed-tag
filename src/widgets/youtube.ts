@@ -14,6 +14,8 @@ export default function createsYouTubeWidget({
   const src = `${base}${embed}${youtubeId}/`;
   properties.title =
     properties.title ?? `YouTube Widget for ${type} ${youtubeId}`;
+  properties.width = properties.width ?? "560";
+  properties.height = properties.height ?? "315";
 
   return createIframe({ src, properties });
 }

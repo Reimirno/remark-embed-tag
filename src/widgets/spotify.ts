@@ -9,7 +9,6 @@ export default function createsSpotifyWidget({
   const src = `https://open.spotify.com/embed/${type}/${spotifyId}`;
   properties.title =
     properties.title ?? `Spotify Widget for ${type} ${spotifyId}`;
-  properties.height = properties.height ?? "80";
 
   return createIframe({ src, properties });
 }

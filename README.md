@@ -94,13 +94,19 @@ Example:
 
 ### Generic IFrame
 
-For any other embeds, you can use the generic iframe tag.
+For all other embeds, you can use the generic iframe tag.
 
 ```markdown
 {% iframe src %}
 ```
 
 - `src` (required): The source url of the iframe.
+
+### Supporting more services!
+
+You are welcome to PR to this repo to add more services!
+
+If you have a service that you want to add, you can also raise an issue to request it.
 
 ## Usage
 

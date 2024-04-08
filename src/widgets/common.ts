@@ -27,7 +27,7 @@ export type IframeProps = {
 export default function createIframe(props: IframeProps): string {
   const { src, properties = {} as ValidIframePropertyDictionary } = props;
   const width = properties.width ?? "100%";
-  const height = properties.height ?? "100%";
+  const height = properties.height ?? "190";
   const title = properties.title ?? "";
   const frameBorder = properties.frameBorder ?? "0";
   const loading = properties.loading === "lazy" ? "lazy" : "eager";

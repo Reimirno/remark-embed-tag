@@ -10,7 +10,6 @@ export default function createsSteamWidget({
     descriptionOverride ? `?t=${descriptionOverride}` : ""
   }`;
   properties.title = properties.title ?? `Steam Widget for appid ${appid}`;
-  properties.height = properties.height ?? "190";
 
   return createIframe({ src, properties });
 }
