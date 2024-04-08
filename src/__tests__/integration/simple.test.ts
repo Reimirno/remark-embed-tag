@@ -11,9 +11,9 @@ describe("happy path", () => {
     );
   });
   it("should parse steam", async () => {
-    const file = await processor.process(`{% steam 123456 %}`);
+    const file = await processor.process(`{% steam 1260810 %}`);
     expect(String(file)).toMatch(
-      /<iframe src="https:\/\/store.steampowered.com\/widget\/123456\/" .*>/
+      /<iframe src="https:\/\/store.steampowered.com\/widget\/1260810\/" .*>/
     );
   });
   it("should parse spotify", async () => {

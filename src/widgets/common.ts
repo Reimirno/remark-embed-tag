@@ -43,7 +43,7 @@ export default function createIframe(props: IframeProps): string {
     `loading="${loading}" ` +
     `allowFullScreen="${allowFullScreen}" ` +
     `allowTransparency="${allowTransparency}" ` +
-    `allow="encrypted-media *; ` +
+    `allow="encrypted-media *;" ` +
     `></iframe>`
   );
 }
