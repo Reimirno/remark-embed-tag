@@ -1,10 +1,11 @@
-import type { SteamType } from "../schema/steam.js";
+import { STEAM_TAG_NAME, type SteamProps } from "../schema/steam.js";
 import parseArgs from "./common.js";
 
-export function parseSteam(inputStr: string): SteamType | null {
-  const args = parseArgs(inputStr, "steam");
+export default function parseSteam(inputStr: string): SteamProps | null {
+  const args = parseArgs(inputStr, STEAM_TAG_NAME);
   if (args === null) return null;
   const appid = args[0] as string;
+  if (!appid) return null;
   const descriptionOverride = args[1] as string | undefined;
-  return { appid, descriptionOverride } as SteamType;
+  return { appid, descriptionOverride } as SteamProps;
 }

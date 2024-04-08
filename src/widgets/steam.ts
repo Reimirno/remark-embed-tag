@@ -1,10 +1,10 @@
-import type { SteamType } from "../schema/steam.js";
-import { createIframe, type IframeProps } from "./common.js";
+import type { SteamProps } from "../schema/steam.js";
+import createIframe, { type IframeProps } from "./common.js";
 
 export default function createsSteamWidget({
   appid,
   descriptionOverride,
-}: SteamType): string {
+}: SteamProps): string {
   const src = `https://store.steampowered.com/widget/${appid}/${
     descriptionOverride ? `?t=${descriptionOverride}` : ""
   }`;

@@ -1,9 +1,23 @@
 {
   "transform": {
-    "^.+\\.(t|j)sx?$": "ts-jest"
+    "^.+\\.(j|t)sx?$": [
+      "ts-jest"
+    ]
+  },
+  "moduleNameMapper": {
+    "^(\\.\\.?\\/.+)\\.js$": "$1"
   },
   "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-  "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
-  "collectCoverageFrom": ["src/**/*.{ts,tsx}"],
-  "collectCoverage":true
+  "moduleFileExtensions": [
+    "ts",
+    "tsx",
+    "js",
+    "jsx",
+    "json",
+    "node"
+  ],
+  "collectCoverageFrom": [
+    "src/**/*.{ts,tsx}"
+  ],
+  "collectCoverage": true
 }

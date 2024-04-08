@@ -4,17 +4,19 @@ export type IframeProps = {
   height?: string;
   title?: string;
   frameBorder?: number;
+  loading?: "lazy" | "eager";
   allowFullScreen?: boolean;
 };
 
-export function createIframe(props: IframeProps): string {
+export default function createIframe(props: IframeProps): string {
   const {
     src,
     width = "100%",
     height = "100%",
     title = "",
     frameBorder = 0,
+    loading = "lazy",
     allowFullScreen = true,
   } = props;
-  return `<iframe src="${src}" width="${width}" height="${height}" title="${title}" frameBorder="${frameBorder}" allowFullScreen="${allowFullScreen}"></iframe>`;
+  return `<iframe src="${src}" width="${width}" height="${height}" title="${title}" frameBorder="${frameBorder}" loading="${loading}" allowFullScreen="${allowFullScreen}"></iframe>`;
 }

@@ -1,8 +1,8 @@
-import parseArgs from "../parsers/common";
+import parseArgs from "../../parsers/common";
 
 describe("common args parser", () => {
   it("should return null if no match", () => {
-    expect(parseArgs("hello world", "steam")).toBeNull();
+    expect(parseArgs("hello world", "something")).toBeNull();
   });
   it("should return empty array if no args", () => {
     expect(parseArgs("{% tag %}", "tag")).toEqual([]);
