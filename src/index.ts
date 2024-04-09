@@ -1,4 +1,5 @@
-import type { Node, Text } from "mdast";
+import type { Root } from "mdast";
+import type { Plugin } from "unified";
 import { visit } from "unist-util-visit";
 import parseEmbed from "./parsers/embed.js";
 import parseSteam from "./parsers/steam.js";
@@ -14,54 +15,70 @@ import createsVimeoWidget from "./widgets/vimeo.js";
 import createsJsFiddleWidget from "./widgets/jsfiddle.js";
 import { Config, defaultConfig } from "./config.js";
 
-export default function remarkTagEmbed(configs: Config = {} as Config) {
+const remarkTagEmbed: Plugin<[Config], Root> = (configs = {}) => {
   configs = { ...defaultConfig, ...configs };
-  const transformer = async (ast: Node) => {
-    visit(ast, "text", (node: Text) => {
+  return (ast) => {
+    visit(ast, "text", (node, index, parent) => {
+      if (index === null || index === undefined || !parent) {
+        return;
+      }
       const { value } = node;
       if (configs.youtube) {
         const youtube = parseYouTube(value);
         if (youtube) {
-          node.type = "html" as "text";
-          node.value = createsYouTubeWidget(youtube);
+          parent.children[index] = {
+            type: "html",
+            value: createsYouTubeWidget(youtube),
+          };
         }
       }
       if (configs.steam) {
         const steam = parseSteam(value);
         if (steam) {
-          node.type = "html" as "text";
-          node.value = createSteamWidget(steam);
+          parent.children[index] = {
+            type: "html",
+            value: createSteamWidget(steam),
+          };
         }
       }
       if (configs.spotify) {
         const spotify = parseSpotify(value);
         if (spotify) {
-          node.type = "html" as "text";
-          node.value = createsSpotifyWidget(spotify);
+          parent.children[index] = {
+            type: "html",
+            value: createsSpotifyWidget(spotify),
+          };
         }
       }
       if (configs.vimeo) {
         const vimeo = parseVimeo(value);
         if (vimeo) {
-          node.type = "html" as "text";
-          node.value = createsVimeoWidget(vimeo);
+          parent.children[index] = {
+            type: "html",
+            value: createsVimeoWidget(vimeo),
+          };
         }
       }
       if (configs.jsfiddle) {
         const jsfiddle = parseJsFiddle(value);
         if (jsfiddle) {
-          node.type = "html" as "text";
-          node.value = createsJsFiddleWidget(jsfiddle);
+          parent.children[index] = {
+            type: "html",
+            value: createsJsFiddleWidget(jsfiddle),
+          };
         }
       }
       if (configs.embed) {
         const embed = parseEmbed(value);
         if (embed) {
-          node.type = "html" as "text";
-          node.value = createEmbedWidget(embed);
+          parent.children[index] = {
+            type: "html",
+            value: createEmbedWidget(embed),
+          };
         }
       }
     });
   };
-  return transformer;
-}
+};
+
+export default remarkTagEmbed;
